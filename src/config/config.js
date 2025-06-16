@@ -3,7 +3,7 @@
 const config = {
   // Meta Information
   meta: {
-    title: "Đám Cưới của Tâm và Long iu dấu",
+    title: "Đám Cưới của Tâm và Long",
     description:
       "Mình cưới nhau rồi nè, đến chung vui với tụi mình nha!",
     favicon: "/images/favicon.ico",
@@ -18,7 +18,7 @@ const config = {
   event: {
     date: "2025-06-22",
     time: "11:00",
-    timezone: "ICT",
+    timeZone: "Hanoi/Jakarta",
     dateTime: "2025-06-22T03:00:00Z", // ISO 8601 format
     name: "Queen Hall, Queen Plaza",
     address: "419B Pham Van Hai, Phuong 1, Quan Tan Binh",
@@ -32,7 +32,7 @@ const config = {
 
   eventDetails: [
     {
-      title: "Saigon",
+      title: "Tại Thành Phố Hồ Chí Minh",
       date: "2025-06-22",
       startTime: "11:00",
       endTime: "14:30",
@@ -42,7 +42,7 @@ const config = {
         "We invite you to join us in celebrating our wedding ceremony.",
     },
     {
-      title: "Dak Lak",
+      title: "Tại Đăk Lắk",
       date: "2025-07-23",
       startTime: "11:00",
       endTime: "14:30",
@@ -67,19 +67,13 @@ const config = {
   bankAccounts: [
     {
       bank: "NCB",
-      accountNumber: "1234567890",
-      accountName: "Nguyen Thi Tam",
-      logo: "/path/to/bca-logo.png",
-    },
-    {
-      bank: "VietinBank",
-      accountNumber: "0987654321",
-      accountName: "Nguyen Ngoc Long",
-      logo: "/path/to/mandiri-logo.png",
-    },
+      accountNumber: "399999999999",
+      accountName: "Nguyễn Thị Tâm",
+      logo: "https://www.ncb-bank.vn/cache-buster-1695119533/website/static/images/logo.png",
+    }
   ],
   qr: {
-    image: "https://lh3.googleusercontent.com/pw/AP1GczMhWqTRO7zPt49PYrDJIrBWvGL2drxQFjs1yoc2a1DJ3NpD9Qgalnm7GcKwurAu0i6WwVA3YDj4VePxU9Uc7-riqkxeB3ladmFSY8YAY4KXcjPCvK04wu15Id1KTkjtni9Hi1xej1LTAk4Pg4aTWWKKGQ=w621-h932-s-no-gm",
+    image: "./images/qr.png",
   },
 };
 
