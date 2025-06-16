@@ -83,7 +83,6 @@ export default function Gallery() {
     { thumb: "./images/gallery/thumbs/415A2349.JPG", full: "./images/gallery/415A2349.JPG" },
     { thumb: "./images/gallery/thumbs/415A2361.JPG", full: "./images/gallery/415A2361.JPG" },
     { thumb: "./images/gallery/thumbs/415A2418.JPG", full: "./images/gallery/415A2418.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2472.JPG", full: "./images/gallery/415A2472.JPG" },
     { thumb: "./images/gallery/thumbs/415A2504.JPG", full: "./images/gallery/415A2504.JPG" },
     { thumb: "./images/gallery/thumbs/415A2573.JPG", full: "./images/gallery/415A2573.JPG" },
     { thumb: "./images/gallery/thumbs/415A2669.JPG", full: "./images/gallery/415A2669.JPG" },
@@ -120,7 +119,6 @@ export default function Gallery() {
     { thumb: "./images/gallery/thumbs/415A3476.JPG", full: "./images/gallery/415A3476.JPG" },
     { thumb: "./images/gallery/thumbs/415A3491.JPG", full: "./images/gallery/415A3491.JPG" },
     { thumb: "./images/gallery/thumbs/415A3493.JPG", full: "./images/gallery/415A3493.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3499.JPG", full: "./images/gallery/415A3499.JPG" },
   ];
 
   // Modal xem ảnh lớn
