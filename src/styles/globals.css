@@ -1,0 +1,30 @@
+.petal {
+  position: fixed;
+  top: -40px;
+  width: 24px;
+  height: 24px;
+  background-image: url('/images/petal.png');
+  background-size: cover;
+  pointer-events: none;
+  z-index: 50;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  /* Có thể điều chỉnh giá trị cho phù hợp */
+}
+
+@media (max-width: 640px) {
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}

@@ -130,7 +130,7 @@ END:VCALENDAR`;
           <div className="flex items-center space-x-3">
             <Clock className="w-5 h-5 text-rose-500" />
             <span>
-              {eventData.startTime} - {eventData.endTime} WIB
+              {eventData.startTime} - {eventData.endTime}
             </span>
           </div>
           <div className="flex items-center space-x-3">
@@ -164,7 +164,7 @@ END:VCALENDAR`;
               icon={(props) => (
                 <Chrome {...props} className="w-5 h-5 text-rose-500" />
               )}
-              label="Lịch của Google iu dấu"
+              label="Lịch Google"
               onClick={() => window.open(googleCalendarLink(), "_blank")}
             />
 
@@ -172,7 +172,7 @@ END:VCALENDAR`;
               icon={(props) => (
                 <Apple {...props} className="w-5 h-5 text-gray-900" />
               )}
-              label="Lịch của Táo cắn dở"
+              label="Lịch Apple"
               onClick={downloadICSFile}
             />
 
@@ -180,7 +180,7 @@ END:VCALENDAR`;
               icon={(props) => (
                 <CalendarIcon {...props} className="w-5 h-5 text-blue-600" />
               )}
-              label="Lịch Outlook nhen"
+              label="Lịch Outlook"
               onClick={downloadICSFile}
             />
           </div>

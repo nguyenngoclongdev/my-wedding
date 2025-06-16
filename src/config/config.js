@@ -42,7 +42,7 @@ const config = {
     },
     {
       title: "Tại Đăk Lắk",
-      date: "2025-07-23",
+      date: "2025-07-13",
       startTime: "11:00",
       endTime: "14:30",
       timeZone: "Hanoi/Jakarta",

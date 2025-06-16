@@ -1,12 +1,12 @@
 import config from "@/config/config";
 import { motion } from "framer-motion";
 import {
-    Building2,
-    CheckCircle,
-    Copy,
-    CreditCard,
-    Gift,
-    Wallet,
+  Building2,
+  CheckCircle,
+  Copy,
+  CreditCard,
+  Gift,
+  Wallet,
 } from "lucide-react";
 import { useState } from "react";
 export default function Gifts() {
@@ -32,13 +32,13 @@ export default function Gifts() {
             transition={{ duration: 0.8 }}
             className="text-center space-y-4 mb-16"
           >
-            {/* <motion.span
+            <motion.span
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="inline-block text-rose-500 font-medium"
             >
-              Quà Cưới
+              (^^)
             </motion.span>
 
             <motion.h2
@@ -47,8 +47,8 @@ export default function Gifts() {
               transition={{ delay: 0.3 }}
               className="text-4xl md:text-5xl font-serif text-gray-800"
             >
-              Gửi Quà
-            </motion.h2> */}
+              Gift
+            </motion.h2>
 
             {/* Decorative Divider */}
             <motion.div
@@ -132,7 +132,7 @@ export default function Gifts() {
             className="mt-12 text-center"
           >
             <div className="inline-block backdrop-blur-sm bg-white/80 p-6 rounded-2xl border border-rose-100/50 shadow-lg">
-              <h3 className="font-medium text-gray-800 mb-4">Quét Mã QR</h3>
+              <h3 className="font-medium text-gray-800 mb-4">NCB | NGUYEN THI TAM</h3>
               <div className="w-48 h-48 bg-gray-100 rounded-lg mx-auto mb-4">
                 <div className="w-full h-full flex items-center justify-center text-gray-400">
                   {config.qr?.image ? (
@@ -146,7 +146,7 @@ export default function Gifts() {
                   )}
                 </div>
               </div>
-              <p className="text-sm text-gray-500">Quét để Gửi Quà</p>
+              <p className="text-sm text-gray-500">Quét để gửi</p>
             </div>
           </motion.div>
         </div>

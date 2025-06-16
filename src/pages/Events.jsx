@@ -7,7 +7,7 @@ export default function Events() {
   return (
     <>
       {/* Event Section */}
-      <section id="event" className="min-h-screen relative overflow-hidden">
+      <section id="event" className="min-h-screen relative overflow-hidden py-12">
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-b from-white via-rose-50/30 to-white" />
         <div className="absolute top-0 left-0 w-64 h-64 bg-rose-100/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
@@ -17,7 +17,7 @@ export default function Events() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 container mx-auto px-4 py-20"
+          className="relative z-10 container mx-auto px-4 py-12"
         >
           {/* Section Header */}
           <motion.div
@@ -41,17 +41,8 @@ export default function Events() {
               transition={{ delay: 0.3 }}
               className="text-4xl md:text-5xl font-serif text-gray-800 leading-tight"
             >
-              Lịch Trình Vui Vẻ Của Tụi Mình
+              Lịch Trình Của Tụi Mình
             </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-gray-500 max-w-md mx-auto"
-            >
-              Mình mời bạn đến chung vui ngày hạnh phúc của tụi mình, ngày mà tình yêu của tụi mình bắt đầu đó!
-            </motion.p>
 
             {/* Decorative Line */}
             <motion.div

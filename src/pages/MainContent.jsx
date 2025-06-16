@@ -1,8 +1,10 @@
 import Hero from '@/pages/Hero'
 import Events from '@/pages/Events'
-import Location from '@/pages/Location';
-import Gifts from '@/pages/Gifts';
-import Wishes from './Wishes';
+import Gallery from '@/pages/Gallery'
+import Gifts from '@/pages/Gifts'
+import Location from '@/pages/Location'
+import ThankYou from './ThankYou'
+import Footer from './Footer'
 
 // Main Invitation Content
 export default function MainContent() {
@@ -12,7 +14,9 @@ export default function MainContent() {
             <Events />
             <Location />
             <Gifts />
-            <Wishes />
+            <Gallery />
+            <ThankYou />
+            <Footer />
         </>
     )
 }
