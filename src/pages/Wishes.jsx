@@ -171,13 +171,18 @@ export default function Wishes() {
           </div>
         </div>
       </section>
-      <section>
+        <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="max-w-2xl mx-auto mt-12"
+                >
         <img
-          src="https://photos.google.com/share/AF1QipNFILPz0c12E1Ahi59FPndVQ9w1P2yzkTJPhEybBAeVhm_Y76FwLQrrDLJdjL42RQ/photo/AF1QipMvjOioJVgfp2eRsQJ4kVHcKZ7fOCZ-3_2w-njS?key=N3d4S1VTSDFwNDRMRlhiWS12MkYzcGlka3hBUFFR"
+          src="https://lh3.googleusercontent.com/pw/AP1GczNFHdzMG_em8V_94Jy62VVHKdlshuwXtBNyJTPlPWBgGGQIwwVxP0FZnQcTYQzr4H2BP_OPBXakfmT9qpgxphIpUcYJhpokeN99Bojc-MkB93l9T8ifMojL6qFl5cpqrHnyolU_QuFG4sPCbsChYZncKA=w1170-h876-s-no"
           alt="Cover"
           className="w-full h-full object-contain"
         />
-      </section>
+                      </motion.div>
     </>
   );
 }
