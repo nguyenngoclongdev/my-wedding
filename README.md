@@ -1,3 +1,0 @@
-```bash
-bun run dev
-```

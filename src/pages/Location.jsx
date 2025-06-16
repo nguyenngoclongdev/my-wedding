@@ -47,7 +47,7 @@ export default function Location() {
               transition={{ delay: 0.3 }}
               className="text-4xl md:text-5xl font-serif text-gray-800"
             >
-              Địa Điểm Vui Vẻ
+              Địa Điểm
             </motion.h2>
 
             {/* Decorative Divider */}
@@ -124,7 +124,7 @@ export default function Location() {
                   {/* Action Buttons */}
                   <div className="grid grid-cols-2 gap-2 pt-4">
                     <motion.a
-                      href={config.event.maps_embed}
+                      href={config.event.maps_navigation}
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.02 }}
@@ -148,13 +148,6 @@ export default function Location() {
                     </motion.a>
                   </div>
                 </div>
-              </div>
-
-              {/* Additional Info */}
-              <div className="bg-rose-50/50 rounded-xl p-4 border border-rose-100">
-                <p className="text-rose-600 text-sm">
-                  <span className="font-medium">Lưu ý nhỏ:</span> Đậu xe free cho mọi người nha!
-                </p>
               </div>
             </motion.div>
           </div>
