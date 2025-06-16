@@ -1,1 +1,3 @@
-# my-wedding
+```bash
+bun run dev
+```
