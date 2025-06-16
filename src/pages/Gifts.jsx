@@ -24,7 +24,7 @@ export default function Gifts() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-rose-100/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-100/20 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
 
-        <div className="container mx-auto px-4 py-20 relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -32,7 +32,7 @@ export default function Gifts() {
             transition={{ duration: 0.8 }}
             className="text-center space-y-4 mb-16"
           >
-            <motion.span
+            {/* <motion.span
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -48,7 +48,7 @@ export default function Gifts() {
               className="text-4xl md:text-5xl font-serif text-gray-800"
             >
               Gửi Quà
-            </motion.h2>
+            </motion.h2> */}
 
             {/* Decorative Divider */}
             <motion.div
