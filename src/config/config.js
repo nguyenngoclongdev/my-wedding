@@ -54,7 +54,7 @@ const config = {
   ],
 
   audio: {
-    src: "../audio/backsound.mp3",
+    src: "./audio/backsound.mp3",
     title: "Fulfilling Humming",
     artist: "Nasheed",
     autoplay: true,
