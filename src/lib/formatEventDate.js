@@ -23,11 +23,11 @@ export const formatEventDate = (isoString, format = "full") => {
     },
   };
 
-  let formatted = date.toLocaleDateString("en-US", formats[format]);
+  let formatted = date.toLocaleDateString("vi-VN", formats[format]);
 
   // Handle time format separately
   if (format === "time") {
-    return date.toLocaleTimeString("en-US", formats[format]);
+    return date.toLocaleTimeString("vi-VN", formats[format]);
   }
 
   // Format adjustment for full date

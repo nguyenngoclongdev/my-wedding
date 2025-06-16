@@ -1,21 +1,14 @@
 // src/components/bottom-bar/BottomBar.jsx
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import {
-  CalendarHeart,
-  Gift,
-  Home,
-  MapPin,
-  MessageCircleHeart,
-} from "lucide-react";
-import React from "react";
+import { CalendarHeart, Gift, Home, Image, MapPin } from "lucide-react";
 
 const menuItems = [
   { icon: Home, label: "Home", href: "#home", section: "home" },
   { icon: CalendarHeart, label: "Event", href: "#event", section: "event" },
   { icon: MapPin, label: "Location", href: "#location", section: "location" },
   { icon: Gift, label: "Gift", href: "#gifts", section: "gifts" },
-  { icon: MessageCircleHeart, label: "Gallery", href: "#gallery", section: "gallery" },
+  { icon: Image, label: "Gallery", href: "#gallery", section: "gallery" },
 ];
 
 const BottomBar = ({ activeSection, onNavigate }) => {
@@ -46,7 +39,9 @@ const BottomBar = ({ activeSection, onNavigate }) => {
               <item.icon
                 className={cn(
                   "h-[18px] w-[18px] sm:h-5 sm:w-5 mb-0.5 sm:mb-1 transition-colors duration-200",
-                  activeSection === item.section ? "stroke-rose-500" : "stroke-gray-600"
+                  activeSection === item.section
+                    ? "stroke-rose-500"
+                    : "stroke-gray-600"
                 )}
               />
               <span
