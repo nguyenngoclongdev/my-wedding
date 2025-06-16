@@ -55,8 +55,8 @@ const config = {
 
   audio: {
     src: "./audio/backsound.mp3",
-    title: "Fulfilling Humming",
-    artist: "Nasheed",
+    title: "Yêu em hơn mỗi ngày",
+    artist: "Andiez",
     autoplay: true,
     loop: true,
     toastDuration: 5000,
