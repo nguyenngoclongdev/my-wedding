@@ -9,6 +9,7 @@ import {
     Navigation as NavigationIcon,
     Phone,
 } from "lucide-react";
+import { trackEvent } from "../analytics";
 
 export default function Location() {
   return (
@@ -130,6 +131,7 @@ export default function Location() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       className="flex items-center justify-center gap-1.5 bg-rose-500 text-white px-4 py-2 rounded-lg hover:bg-rose-600 transition-colors text-sm"
+                      onClick={() => trackEvent("location_navigation_click")}
                     >
                       <NavigationIcon className="w-3.5 h-3.5" />
                       <span>Chỉ Đường</span>
@@ -142,6 +144,7 @@ export default function Location() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       className="flex items-center justify-center gap-1.5 bg-white text-gray-600 px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors text-sm"
+                      onClick={() => trackEvent("location_mapview_click")}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>Xem Bản Đồ</span>

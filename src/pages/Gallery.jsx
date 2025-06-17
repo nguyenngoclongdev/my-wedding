@@ -187,7 +187,10 @@ export default function Gallery() {
                 key={img.full}
                 src={img.thumb}
                 alt={`Gallery ${idx + 1}`}
-                onClick={() => setSelected(img.full)}
+                onClick={() => {
+                  setSelected(img.full);
+                  trackEvent("gallery_modal_open", { image: img.full });
+                }}
               />
             ))}
           </div>
@@ -196,7 +199,10 @@ export default function Gallery() {
             <div className="flex justify-center mt-8">
               <button
                 className="px-6 py-2 rounded-full bg-rose-200 text-rose-700 font-semibold shadow hover:bg-rose-300 transition"
-                onClick={() => setVisibleCount((c) => c + 12)}
+                onClick={() => {
+                  setVisibleCount((c) => c + 12);
+                  trackEvent("gallery_see_more", { currentCount: visibleCount });
+                }}
               >
                 Xem thêm ảnh
               </button>

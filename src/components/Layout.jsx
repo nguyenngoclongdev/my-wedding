@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Music, PauseCircle, PlayCircle } from 'lucide-react';
 import config from '@/config/config';
 import BottomBar from '@/components/BottomBar';
+import { trackEvent } from "../analytics";
 
 const SECTION_IDS = ["home", "event", "location", "gifts", "gallery"];
 
@@ -158,9 +159,11 @@ const Layout = ({ children }) => {
         if (isPlaying) {
           audioRef.current.pause();
           wasPlayingRef.current = false;
+          trackEvent("music_pause");
         } else {
           await audioRef.current.play();
           wasPlayingRef.current = true;
+          trackEvent("music_play");
         }
       } catch (error) {
         console.error('Playback error:', error);

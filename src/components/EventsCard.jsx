@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { trackEvent } from "../analytics"; // thêm dòng này
 
 const Modal = ({ isOpen, onClose, children }) => {
   return (
@@ -165,7 +166,10 @@ END:VCALENDAR`;
                 <Chrome {...props} className="w-5 h-5 text-rose-500" />
               )}
               label="Lịch Google"
-              onClick={() => window.open(googleCalendarLink(), "_blank")}
+              onClick={() => {
+                window.open(googleCalendarLink(), "_blank");
+                trackEvent("calendar_add_google", { event: eventData.title });
+              }}
             />
 
             <CalendarButton
@@ -173,7 +177,10 @@ END:VCALENDAR`;
                 <Apple {...props} className="w-5 h-5 text-gray-900" />
               )}
               label="Lịch Apple"
-              onClick={downloadICSFile}
+              onClick={() => {
+                downloadICSFile();
+                trackEvent("calendar_add_apple", { event: eventData.title });
+              }}
             />
 
             <CalendarButton
@@ -181,7 +188,10 @@ END:VCALENDAR`;
                 <CalendarIcon {...props} className="w-5 h-5 text-blue-600" />
               )}
               label="Lịch Outlook"
-              onClick={downloadICSFile}
+              onClick={() => {
+                downloadICSFile();
+                trackEvent("calendar_add_outlook", { event: eventData.title });
+              }}
             />
           </div>
         </div>
