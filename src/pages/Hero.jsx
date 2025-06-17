@@ -119,12 +119,16 @@ export default function Hero() {
 
         <PetalFalling />
 
+        {/* Main content block absolutely positioned above bottom bar */}
         <div
-          className="container mx-auto px-4 relative z-10 flex flex-col items-center w-full"
-          style={{ marginBottom: 70 }}
+          className="container mx-auto px-4 w-full max-w-xl left-1/2 -translate-x-1/2 absolute z-10"
+          style={{
+            bottom: 70, // height of bottom bar + gap
+            pointerEvents: "auto",
+          }}
         >
           <motion.div
-            className="w-full max-w-xl mx-auto mb-8 rounded-2xl bg-white/100 backdrop-blur-lg shadow-xl border border-rose-100 px-6 py-7 flex flex-col items-center gap-4"
+            className="w-full mb-8 rounded-2xl bg-white/100 backdrop-blur-lg shadow-xl border border-rose-100 px-6 py-7 flex flex-col items-center gap-4"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
