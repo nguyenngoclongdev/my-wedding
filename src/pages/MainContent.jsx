@@ -4,7 +4,6 @@ import Gifts from "@/pages/Gifts";
 import Hero from "@/pages/Hero";
 import Location from "@/pages/Location";
 import Footer from "./Footer";
-import ThankYou from "./ThankYou";
 
 // Main Invitation Content
 export default function MainContent() {
@@ -15,7 +14,6 @@ export default function MainContent() {
       <Location />
       <Gifts />
       <Gallery />
-      <ThankYou />
       <Footer />
     </>
   );
