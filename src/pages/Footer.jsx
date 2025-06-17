@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export default function Footer() {
   return (
     <section
-      className="pt-16 pb-4 bg-rose-50 text-center"
+      className="pt-16 pb-4 bg-rose-50 text-center rounded-2xl"
       style={{ marginBottom: 100 }}
     >
       <motion.h2
