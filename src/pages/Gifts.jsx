@@ -136,7 +136,7 @@ export default function Gifts() {
             className="mt-12 text-center"
           >
             <div className="inline-block backdrop-blur-sm bg-white/80 p-6 rounded-2xl border border-rose-100/50 shadow-lg">
-              <h3 className="font-medium text-gray-800 mb-4">NCB | NGUYEN THI TAM</h3>
+              {/* <h3 className="font-medium text-gray-800 mb-4">NCB | NGUYEN THI TAM</h3> */}
               <div className="w-48 h-48 bg-gray-100 rounded-lg mx-auto mb-4">
                 <div className="w-full h-full flex items-center justify-center text-gray-400">
                   {config.qr?.image ? (
@@ -150,7 +150,7 @@ export default function Gifts() {
                   )}
                 </div>
               </div>
-              <p className="text-sm text-gray-500">Quét để gửi</p>
+              {/* <p className="text-sm text-gray-500">Quét để gửi</p> */}
             </div>
           </motion.div>
         </div>
