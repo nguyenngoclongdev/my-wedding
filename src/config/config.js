@@ -41,7 +41,7 @@ const config = {
       location: "Queen Hall, Queen Plaza",
     },
     {
-      title: "Tại Đăk Lắk",
+      title: "Tại Đắk Lắk",
       date: "2025-07-13",
       startTime: "11:00",
       endTime: "14:30",
