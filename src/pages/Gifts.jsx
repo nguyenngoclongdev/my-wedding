@@ -143,7 +143,7 @@ export default function Gifts() {
                     <img
                       src={config.qr.image}
                       alt="QR Code"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-fill"
                     />
                   ) : (
                     <CreditCard className="w-12 h-12" />
