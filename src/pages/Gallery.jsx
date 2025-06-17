@@ -1,11 +1,18 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import { trackEvent } from "../analytics"; // Thêm dòng này
 
 // New component for smooth image loading
 function GalleryImage({ src, alt, onClick }) {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className="relative cursor-pointer group" onClick={onClick}>
+    <div
+      className="relative cursor-pointer group"
+      onClick={(e) => {
+        trackEvent("gallery_image_click", { src, alt });
+        if (onClick) onClick(e);
+      }}
+    >
       {/* Blurred placeholder */}
       <div
         className={`absolute inset-0 rounded-xl bg-gray-200 ${

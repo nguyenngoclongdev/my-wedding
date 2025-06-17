@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { CalendarHeart, Gift, Home, Image, MapPin } from "lucide-react";
+import { trackEvent } from "../analytics";
 
 const menuItems = [
   { icon: Home, label: "Home", href: "#home", section: "home" },
@@ -34,7 +35,10 @@ const BottomBar = ({ activeSection, onNavigate }) => {
               )}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => onNavigate(item.section)}
+              onClick={() => {
+                trackEvent("bottom_bar_click", { section: item.section });
+                onNavigate(item.section);
+              }}
             >
               <item.icon
                 className={cn(
