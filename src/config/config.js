@@ -3,7 +3,7 @@
 const config = {
   // Meta Information
   meta: {
-    title: "Đám Cưới của Tâm và Long",
+    title: "Tâm ♥ Long | Wedding Invitation",
     description: "Mình cưới nhau rồi nè, đến chung vui với tụi mình nha!",
     favicon: "/images/favicon.ico",
   },

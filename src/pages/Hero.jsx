@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import PetalFalling from "./PetalFalling";
+import config from "@/config/config";
 
 export default function Hero() {
   const [guestName, setGuestName] = useState("");
@@ -109,7 +110,7 @@ export default function Hero() {
         <div className="absolute inset-0 z-0">
           <img
             src="./images/gallery/60X90.JPG"
-            alt="Long & Tâm"
+            alt={`${config.couple.brideName} ♥ ${config.couple.groomName}`}
             className="w-full h-full object-cover object-center"
             style={{ minHeight: "100vh" }}
           />
@@ -133,12 +134,9 @@ export default function Hero() {
                 className="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight text-center"
                 style={{ display: "flex", alignItems: "center", gap: 8 }}
               >
-                Tâm
-                <Heart
-                  className="w-4 h-4 text-rose-400"
-                  fill="currentColor"
-                />{" "}
-                Long
+                {config.couple.brideName}
+                <Heart className="w-4 h-4 text-rose-400" fill="currentColor" />
+                {config.couple.groomName}
               </span>
               <span className="flex items-center gap-2 text-base md:text-lg text-gray-700 font-medium mt-1">
                 Chủ Nhật | 22 - 06 - 2025
