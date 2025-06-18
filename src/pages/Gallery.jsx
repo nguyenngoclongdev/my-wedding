@@ -131,6 +131,12 @@ export default function Gallery() {
   // Modal xem ảnh lớn
   const [selected, setSelected] = useState(null);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [modalImgLoaded, setModalImgLoaded] = useState(false); // Thêm state này
+
+  // Reset trạng thái khi đóng modal hoặc đổi ảnh
+  useEffect(() => {
+    setModalImgLoaded(false);
+  }, [selected]);
 
   return (
     <>
@@ -220,16 +226,48 @@ export default function Gallery() {
               exit={{ opacity: 0 }}
               onClick={() => setSelected(null)}
             >
-              <motion.img
-                src={`${selected}`}
-                alt="Selected"
-                className="max-w-[90vw] max-h-[80vh] rounded-2xl shadow-2xl border-4 border-white"
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0.8 }}
-                onClick={(e) => e.stopPropagation()}
-                loading="lazy"
-              />
+              <div className="flex items-center justify-center max-w-[90vw] max-h-[80vh]">
+                <div className="relative inline-block">
+                  {/* Close button luôn nằm ở top right của ảnh */}
+                  <button
+                    className={`absolute top-2 right-2 z-20 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition ${
+                      modalImgLoaded ? "opacity-100 cursor-pointer" : "opacity-60 cursor-not-allowed"
+                    }`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (modalImgLoaded) setSelected(null);
+                    }}
+                    aria-label="Đóng"
+                    disabled={!modalImgLoaded}
+                    tabIndex={modalImgLoaded ? 0 : -1}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  {/* Loading spinner khi ảnh chưa load */}
+                  {!modalImgLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-2xl border-4 border-white shadow-2xl z-10">
+                      <svg className="animate-spin h-12 w-12 text-rose-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                      </svg>
+                    </div>
+                  )}
+                  <motion.img
+                    src={`${selected}`}
+                    alt="Selected"
+                    className="max-w-[90vw] max-h-[80vh] rounded-2xl shadow-2xl border-4 border-white transition-opacity duration-300"
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0.8 }}
+                    onClick={(e) => e.stopPropagation()}
+                    loading="lazy"
+                    onLoad={() => setModalImgLoaded(true)}
+                    style={{ opacity: modalImgLoaded ? 1 : 0 }}
+                  />
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
