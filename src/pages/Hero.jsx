@@ -1,26 +1,10 @@
-import { safeBase64 } from "@/lib/base64";
+import config from "@/config/config";
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import PetalFalling from "./PetalFalling";
-import config from "@/config/config";
 
 export default function Hero() {
-  const [guestName, setGuestName] = useState("");
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const guestParam = urlParams.get("guest");
-    if (guestParam) {
-      try {
-        const decodedName = safeBase64.decode(guestParam);
-        setGuestName(decodedName);
-      } catch {
-        setGuestName("");
-      }
-    }
-  }, []);
-
   const CountdownTimer = ({ targetDate }) => {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
     function calculateTimeLeft() {
@@ -153,13 +137,9 @@ export default function Hero() {
               </span>
             </div>
             <CountdownTimer targetDate="2025-06-22T10:30:00" />
-            {guestName && (
-              <div className="text-base text-gray-700 text-center mt-2">
-                Kính mời{" "}
-                <span className="font-semibold text-rose-600">{guestName}</span>{" "}
-                đến dự lễ cưới của chúng mình!
-              </div>
-            )}
+            {/* <div className="text-base text-gray-700 text-center mt-2">
+              Mời bạn đến dự lễ cưới của chúng mình!
+            </div> */}
           </motion.div>
         </div>
       </section>

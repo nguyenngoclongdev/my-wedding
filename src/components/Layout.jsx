@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
     // Try to autoplay
     const attemptAutoplay = async () => {
       try {
-        await audioRef.current.play();
+        await audioRef.current?.play();
         setIsPlaying(true);
         wasPlayingRef.current = true;
         setShowToast(true);
@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
         // Add click event listener for first interaction
         const handleFirstInteraction = async () => {
           try {
-            await audioRef.current.play();
+            await audioRef.current?.play();
             setIsPlaying(true);
             wasPlayingRef.current = true;
             setShowToast(true);

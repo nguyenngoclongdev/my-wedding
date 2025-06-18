@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
-import { trackEvent } from "../analytics"; // Thêm dòng này
+import { LoaderCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "../analytics";
 
 // New component for smooth image loading
 function GalleryImage({ src, alt, onClick }) {
@@ -71,7 +72,11 @@ function LazyGalleryImage({ src, alt, onClick }) {
   }, []);
 
   return (
-    <div ref={ref} className="relative cursor-pointer group min-h-[14rem]" onClick={onClick}>
+    <div
+      ref={ref}
+      className="relative cursor-pointer group min-h-[14rem]"
+      onClick={onClick}
+    >
       {show ? (
         <GalleryImage src={src} alt={alt} />
       ) : (
@@ -83,49 +88,178 @@ function LazyGalleryImage({ src, alt, onClick }) {
 
 export default function Gallery() {
   const images = [
-    { thumb: "./images/gallery/thumbs/60X90.JPG", full: "./images/gallery/60X90.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2259.JPG", full: "./images/gallery/415A2259.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2318.JPG", full: "./images/gallery/415A2318.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2329.JPG", full: "./images/gallery/415A2329.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2349.JPG", full: "./images/gallery/415A2349.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2361.JPG", full: "./images/gallery/415A2361.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2418.JPG", full: "./images/gallery/415A2418.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2504.JPG", full: "./images/gallery/415A2504.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2573.JPG", full: "./images/gallery/415A2573.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2669.JPG", full: "./images/gallery/415A2669.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2698.JPG", full: "./images/gallery/415A2698.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2774.JPG", full: "./images/gallery/415A2774.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2776.JPG", full: "./images/gallery/415A2776.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2786.JPG", full: "./images/gallery/415A2786.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2819.JPG", full: "./images/gallery/415A2819.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2823.JPG", full: "./images/gallery/415A2823.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2879.JPG", full: "./images/gallery/415A2879.JPG" },
-    { thumb: "./images/gallery/thumbs/415A2960.JPG", full: "./images/gallery/415A2960.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3001.JPG", full: "./images/gallery/415A3001.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3058.JPG", full: "./images/gallery/415A3058.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3126.JPG", full: "./images/gallery/415A3126.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3132.JPG", full: "./images/gallery/415A3132.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3146.JPG", full: "./images/gallery/415A3146.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3180.JPG", full: "./images/gallery/415A3180.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3199.JPG", full: "./images/gallery/415A3199.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3215.JPG", full: "./images/gallery/415A3215.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3252.JPG", full: "./images/gallery/415A3252.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3283.JPG", full: "./images/gallery/415A3283.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3298.JPG", full: "./images/gallery/415A3298.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3316.JPG", full: "./images/gallery/415A3316.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3343.JPG", full: "./images/gallery/415A3343.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3352.JPG", full: "./images/gallery/415A3352.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3381.JPG", full: "./images/gallery/415A3381.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3386.JPG", full: "./images/gallery/415A3386.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3397.JPG", full: "./images/gallery/415A3397.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3403.JPG", full: "./images/gallery/415A3403.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3427.JPG", full: "./images/gallery/415A3427.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3437.JPG", full: "./images/gallery/415A3437.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3446.JPG", full: "./images/gallery/415A3446.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3449.JPG", full: "./images/gallery/415A3449.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3476.JPG", full: "./images/gallery/415A3476.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3491.JPG", full: "./images/gallery/415A3491.JPG" },
-    { thumb: "./images/gallery/thumbs/415A3493.JPG", full: "./images/gallery/415A3493.JPG" },
+    {
+      thumb: "./images/gallery/thumbs/60X90.JPG",
+      full: "./images/gallery/60X90.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2259.JPG",
+      full: "./images/gallery/415A2259.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2318.JPG",
+      full: "./images/gallery/415A2318.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2329.JPG",
+      full: "./images/gallery/415A2329.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2349.JPG",
+      full: "./images/gallery/415A2349.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2361.JPG",
+      full: "./images/gallery/415A2361.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2418.JPG",
+      full: "./images/gallery/415A2418.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2504.JPG",
+      full: "./images/gallery/415A2504.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2573.JPG",
+      full: "./images/gallery/415A2573.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2669.JPG",
+      full: "./images/gallery/415A2669.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2698.JPG",
+      full: "./images/gallery/415A2698.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2774.JPG",
+      full: "./images/gallery/415A2774.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2776.JPG",
+      full: "./images/gallery/415A2776.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2786.JPG",
+      full: "./images/gallery/415A2786.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2819.JPG",
+      full: "./images/gallery/415A2819.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2823.JPG",
+      full: "./images/gallery/415A2823.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2879.JPG",
+      full: "./images/gallery/415A2879.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A2960.JPG",
+      full: "./images/gallery/415A2960.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3001.JPG",
+      full: "./images/gallery/415A3001.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3058.JPG",
+      full: "./images/gallery/415A3058.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3126.JPG",
+      full: "./images/gallery/415A3126.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3132.JPG",
+      full: "./images/gallery/415A3132.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3146.JPG",
+      full: "./images/gallery/415A3146.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3180.JPG",
+      full: "./images/gallery/415A3180.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3199.JPG",
+      full: "./images/gallery/415A3199.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3215.JPG",
+      full: "./images/gallery/415A3215.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3252.JPG",
+      full: "./images/gallery/415A3252.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3283.JPG",
+      full: "./images/gallery/415A3283.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3298.JPG",
+      full: "./images/gallery/415A3298.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3316.JPG",
+      full: "./images/gallery/415A3316.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3343.JPG",
+      full: "./images/gallery/415A3343.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3352.JPG",
+      full: "./images/gallery/415A3352.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3381.JPG",
+      full: "./images/gallery/415A3381.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3386.JPG",
+      full: "./images/gallery/415A3386.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3397.JPG",
+      full: "./images/gallery/415A3397.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3403.JPG",
+      full: "./images/gallery/415A3403.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3427.JPG",
+      full: "./images/gallery/415A3427.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3437.JPG",
+      full: "./images/gallery/415A3437.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3446.JPG",
+      full: "./images/gallery/415A3446.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3449.JPG",
+      full: "./images/gallery/415A3449.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3476.JPG",
+      full: "./images/gallery/415A3476.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3491.JPG",
+      full: "./images/gallery/415A3491.JPG",
+    },
+    {
+      thumb: "./images/gallery/thumbs/415A3493.JPG",
+      full: "./images/gallery/415A3493.JPG",
+    },
   ];
 
   // Modal xem ảnh lớn
@@ -207,7 +341,9 @@ export default function Gallery() {
                 className="px-6 py-2 rounded-full bg-rose-200 text-rose-700 font-semibold shadow hover:bg-rose-300 transition"
                 onClick={() => {
                   setVisibleCount((c) => c + 12);
-                  trackEvent("gallery_see_more", { currentCount: visibleCount });
+                  trackEvent("gallery_see_more", {
+                    currentCount: visibleCount,
+                  });
                 }}
               >
                 Xem thêm ảnh
@@ -227,11 +363,16 @@ export default function Gallery() {
               onClick={() => setSelected(null)}
             >
               <div className="flex items-center justify-center max-w-[90vw] max-h-[80vh]">
-                <div className="relative inline-block">
+                <div
+                  className={`relative ${modalImgLoaded ? "inline-block" : "flex items-center justify-center"} 
+                    ${!modalImgLoaded ? "min-w-[300px] min-h-[200px]" : ""}`}
+                >
                   {/* Close button luôn nằm ở top right của ảnh */}
                   <button
                     className={`absolute top-2 right-2 z-20 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition ${
-                      modalImgLoaded ? "opacity-100 cursor-pointer" : "opacity-60 cursor-not-allowed"
+                      modalImgLoaded
+                        ? "opacity-100 cursor-pointer"
+                        : "opacity-60 cursor-not-allowed"
                     }`}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -241,17 +382,25 @@ export default function Gallery() {
                     disabled={!modalImgLoaded}
                     tabIndex={modalImgLoaded ? 0 : -1}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-gray-700"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                   {/* Loading spinner khi ảnh chưa load */}
                   {!modalImgLoaded && (
                     <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-2xl border-4 border-white shadow-2xl z-10">
-                      <svg className="animate-spin h-12 w-12 text-rose-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                      </svg>
+                      <LoaderCircle className="animate-spin h-12 w-12 text-rose-400" />
                     </div>
                   )}
                   <motion.img
