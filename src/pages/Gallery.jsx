@@ -372,15 +372,13 @@ export default function Gallery() {
                     className={`absolute top-2 right-2 z-20 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition ${
                       modalImgLoaded
                         ? "opacity-100 cursor-pointer"
-                        : "opacity-60 cursor-not-allowed"
+                        : "opacity-60 cursor-pointer"
                     }`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (modalImgLoaded) setSelected(null);
+                      setSelected(null);
                     }}
                     aria-label="Đóng"
-                    disabled={!modalImgLoaded}
-                    tabIndex={modalImgLoaded ? 0 : -1}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
