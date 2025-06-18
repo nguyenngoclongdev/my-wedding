@@ -154,7 +154,7 @@ export default function Footer() {
                       Tiếc quá! <span className="font-extrabold text-rose-700">{name.trim()}</span> không thể tham dự lần này.
                     </div>
                     <div className="text-base text-gray-700 text-center">
-                      Tụi mình vẫn rất vui và trân trọng tình cảm của {name.trim()}.<br />
+                      Tụi mình vẫn rất vui và trân trọng tình cảm của {name.trim()}.{" "}
                       Hẹn gặp {name.trim()} vào dịp khác nhé! 🌸
                     </div>
                     <div className="text-sm text-gray-400 text-center mt-1">
@@ -164,7 +164,7 @@ export default function Footer() {
                 )}
                 {wish.trim() && (
                   <div className="w-full flex flex-col items-center px-4 py-3 bg-white rounded-xl border border-rose-100 shadow-sm mt-2">
-                    <div className="text-xs text-gray-400 mb-1">Lời nhắn của {name.trim()}</div>
+                    <div className="text-xs text-gray-400 mb-1">Lời nhắn của {name.trim()} tới tụi mình</div>
                     <div className="px-2 py-1 text-rose-500 text-center text-base break-words font-medium">
                       “{wish.trim()}”
                     </div>
