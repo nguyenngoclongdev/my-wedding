@@ -1,17 +1,65 @@
 import config from "@/config/config";
 import { motion } from "framer-motion";
 import { CheckCircle, X, XCircle, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { trackEvent } from "../analytics";
 
 export default function Footer() {
-  const [submitted, setSubmitted] = useState(null);
-  const [name, setName] = useState("");
-  const [wish, setWish] = useState("");
+  const STORAGE_KEY = "wedding_rsvp";
+  const getInitial = () => {
+    if (typeof window === "undefined") return {};
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === "object") {
+          return parsed;
+        }
+      } catch {}
+    }
+    return {};
+  };
+
+  const initial = getInitial();
+  const [submitted, setSubmitted] = useState(initial.submitted || null);
+  const [name, setName] = useState(initial.name || "");
+  const [wish, setWish] = useState(initial.wish || "");
+
+  useEffect(() => {
+    // Sync lại nếu localStorage thay đổi (ví dụ tab khác gửi RSVP)
+    const onStorage = () => {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === "object") {
+            setName(parsed.name || "");
+            setWish(parsed.wish || "");
+            setSubmitted(parsed.submitted || null);
+          }
+        } catch {}
+      } else {
+        setName("");
+        setWish("");
+        setSubmitted(null);
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   const handleRSVP = (response) => {
     trackEvent("rsvp_submit", { response, name, wish });
     setSubmitted(response);
+    // Save to localStorage
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ name, wish, submitted: response })
+    );
+  };
+
+  const handleReset = () => {
+    setSubmitted(null);
   };
 
   return (
@@ -33,7 +81,9 @@ export default function Footer() {
             Nhắn gì cho tụi mình nha!
           </h2>
           <p className="text-gray-600 text-center text-base md:text-lg max-w-xs">
-            Dù bạn đến chung vui hay chỉ ghé gửi lời chúc, tụi mình đều rất trân trọng! Để lại tên và vài dòng nhắn nhủ cho tụi mình nhé, tụi mình sẽ đọc hết và cảm động lắm luôn á 🥰
+            Dù bạn đến chung vui hay chỉ ghé gửi lời chúc, tụi mình đều rất trân
+            trọng! Để lại tên và vài dòng nhắn nhủ cho tụi mình nhé, tụi mình sẽ
+            đọc hết và cảm động lắm luôn á 🥰
           </p>
         </motion.div>
         {/* RSVP */}
@@ -128,10 +178,16 @@ export default function Footer() {
                       <Sparkles className="w-9 h-9 text-rose-400 mb-1" />
                     </motion.div>
                     <div className="text-lg font-bold text-rose-600 text-center">
-                      Tuyệt vời quá! <span className="font-extrabold text-rose-700">{name.trim()}</span> sẽ đến chung vui cùng tụi mình! <span className="text-xl">🎉</span>
+                      Tuyệt vời quá!{" "}
+                      <span className="font-extrabold text-rose-700">
+                        {name.trim()}
+                      </span>{" "}
+                      sẽ đến chung vui cùng tụi mình!{" "}
+                      <span className="text-xl">🎉</span>
                     </div>
                     <div className="text-base text-gray-700 text-center">
-                      Tụi mình mong chờ được gặp {name.trim()}, cùng nhau lưu lại những khoảnh khắc thật đẹp nhé! 💖
+                      Tụi mình mong chờ được gặp {name.trim()}, cùng nhau lưu
+                      lại những khoảnh khắc thật đẹp nhé! 💖
                     </div>
                   </>
                 ) : (
@@ -147,16 +203,23 @@ export default function Footer() {
                       <XCircle className="w-9 h-9 text-rose-300 mb-1" />
                     </motion.div>
                     <div className="text-lg font-bold text-rose-600 text-center">
-                      Tiếc quá, <span className="font-extrabold text-rose-700">{name.trim()}</span> không đến được lần này rồi 😢
+                      Tiếc quá,{" "}
+                      <span className="font-extrabold text-rose-700">
+                        {name.trim()}
+                      </span>{" "}
+                      không đến được lần này rồi 😢
                     </div>
                     <div className="text-base text-gray-700 text-center">
-                      Tụi mình vẫn luôn trân trọng tình cảm của {name.trim()}. Hẹn gặp {name.trim()} vào dịp khác nhé! 🌸
+                      Tụi mình vẫn luôn trân trọng tình cảm của {name.trim()}.
+                      Hẹn gặp {name.trim()} vào dịp khác nhé! 🌸
                     </div>
                   </>
                 )}
                 {wish.trim() && (
                   <div className="w-full flex flex-col items-center px-4 py-3 bg-white rounded-xl border border-rose-100 shadow-sm mt-2">
-                    <div className="text-xs text-gray-400 mb-1">Lời nhắn của {name.trim()} tới tụi mình nè</div>
+                    <div className="text-xs text-gray-400 mb-1">
+                      Lời nhắn của {name.trim()} tới tụi mình nè
+                    </div>
                     <div className="px-2 py-1 text-rose-500 text-center text-base break-words font-medium">
                       “{wish.trim()}”
                     </div>
@@ -165,7 +228,7 @@ export default function Footer() {
               </div>
               <button
                 className="mt-1 px-4 py-2 rounded-lg border border-rose-200 bg-white text-rose-500 font-medium hover:bg-rose-50 transition"
-                onClick={() => setSubmitted(null)}
+                onClick={handleReset}
               >
                 Muốn đổi ý? Nhấn lại nè 💌
               </button>
@@ -173,9 +236,14 @@ export default function Footer() {
           )}
         </div>
       </motion.div>
-      <div className="w-full flex flex-col items-center mt-8" style={{ marginBottom: 70 }}>
+      <div
+        className="w-full flex flex-col items-center mt-8"
+        style={{ marginBottom: 70 }}
+      >
         <div className="text-xs text-gray-400 text-center">
-          © {new Date().getFullYear()} {`${config.couple.brideName} ♥ ${config.couple.groomName}`}<br />
+          © {new Date().getFullYear()}{" "}
+          {`${config.couple.brideName} ♥ ${config.couple.groomName}`}
+          <br />
           Tụi mình cảm ơn bạn rất nhiều vì đã đồng hành!
         </div>
       </div>
