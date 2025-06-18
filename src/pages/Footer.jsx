@@ -45,7 +45,7 @@ export default function Footer() {
                   <input
                     type="text"
                     className="w-full px-4 py-3 rounded-lg border border-rose-200 focus:border-rose-400 focus:outline-none bg-rose-50/60 pr-10"
-                    placeholder="Tên bạn là gì nè? (Đừng ngại nha 😊)"
+                    placeholder="Tên của bạn nè..."
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -66,7 +66,7 @@ export default function Footer() {
                 <div className="relative">
                   <textarea
                     className="w-full px-4 py-3 rounded-lg border border-rose-200 focus:border-rose-400 focus:outline-none bg-rose-50/60 resize-none pr-10"
-                    placeholder="Có gì muốn nhắn tụi mình không? (Không bắt buộc đâu, nhưng tụi mình sẽ rất vui nếu có 💬)"
+                    placeholder="Có gì muốn nhắn cho tụi mình không? (tuỳ thích nha)"
                     rows={2}
                     value={wish}
                     onChange={(e) => setWish(e.target.value)}
