@@ -30,10 +30,10 @@ export default function Footer() {
         >
           <span className="text-3xl mb-1">💌</span>
           <h2 className="text-xl md:text-2xl font-serif text-rose-600">
-            Bạn ơi, cho tụi mình biết với nhé!
+            Nhắn gì cho tụi mình nha!
           </h2>
           <p className="text-gray-600 text-center text-base md:text-lg max-w-xs">
-            Tụi mình rất mong nhận được lời chúc hoặc xác nhận tham dự từ bạn. Đừng ngại để lại đôi dòng dễ thương nha!
+            Dù bạn đến chung vui hay chỉ ghé gửi lời chúc, tụi mình đều rất trân trọng! Để lại tên và vài dòng nhắn nhủ cho tụi mình nhé, tụi mình sẽ đọc hết và cảm động lắm luôn á 🥰
           </p>
         </motion.div>
         {/* RSVP */}
@@ -45,7 +45,7 @@ export default function Footer() {
                   <input
                     type="text"
                     className="w-full px-4 py-3 rounded-lg border border-rose-200 focus:border-rose-400 focus:outline-none bg-rose-50/60 pr-10"
-                    placeholder="Tên của bạn nè..."
+                    placeholder="Tên bạn là gì nè? (Đừng ngại nha 😊)"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -66,7 +66,7 @@ export default function Footer() {
                 <div className="relative">
                   <textarea
                     className="w-full px-4 py-3 rounded-lg border border-rose-200 focus:border-rose-400 focus:outline-none bg-rose-50/60 resize-none pr-10"
-                    placeholder="Có lời nhắn gì cho tụi mình không? (tuỳ thích nha)"
+                    placeholder="Có gì muốn nhắn tụi mình không? (Không bắt buộc đâu, nhưng tụi mình sẽ rất vui nếu có 💬)"
                     rows={2}
                     value={wish}
                     onChange={(e) => setWish(e.target.value)}
@@ -114,7 +114,6 @@ export default function Footer() {
             </>
           ) : (
             <div className="flex flex-col items-center gap-4 w-full">
-              {/* Khối xác nhận + cảm ơn: chỉ 1 lời nhắn liền mạch */}
               <div className="w-full flex flex-col items-center gap-3 px-4 py-6 bg-rose-50/80 rounded-xl border border-rose-100 shadow-sm">
                 {submitted === "yes" ? (
                   <>
@@ -129,13 +128,10 @@ export default function Footer() {
                       <Sparkles className="w-9 h-9 text-rose-400 mb-1" />
                     </motion.div>
                     <div className="text-lg font-bold text-rose-600 text-center">
-                      Yay! <span className="font-extrabold text-rose-700">{name.trim()}</span> sẽ đến dự tiệc cùng tụi mình!
+                      Tuyệt vời quá! <span className="font-extrabold text-rose-700">{name.trim()}</span> sẽ đến chung vui cùng tụi mình! <span className="text-xl">🎉</span>
                     </div>
                     <div className="text-base text-gray-700 text-center">
-                      Tụi mình rất háo hức được gặp {name.trim()} và cùng nhau tạo nên những kỷ niệm thật vui 💖
-                    </div>
-                    <div className="text-sm text-gray-400 text-center mt-1">
-                      Cảm ơn {name.trim()} đã xác nhận nha!
+                      Tụi mình mong chờ được gặp {name.trim()}, cùng nhau lưu lại những khoảnh khắc thật đẹp nhé! 💖
                     </div>
                   </>
                 ) : (
@@ -151,20 +147,16 @@ export default function Footer() {
                       <XCircle className="w-9 h-9 text-rose-300 mb-1" />
                     </motion.div>
                     <div className="text-lg font-bold text-rose-600 text-center">
-                      Tiếc quá! <span className="font-extrabold text-rose-700">{name.trim()}</span> không thể tham dự lần này.
+                      Tiếc quá, <span className="font-extrabold text-rose-700">{name.trim()}</span> không đến được lần này rồi 😢
                     </div>
                     <div className="text-base text-gray-700 text-center">
-                      Tụi mình vẫn rất vui và trân trọng tình cảm của {name.trim()}.{" "}
-                      Hẹn gặp {name.trim()} vào dịp khác nhé! 🌸
-                    </div>
-                    <div className="text-sm text-gray-400 text-center mt-1">
-                      Cảm ơn {name.trim()} đã gửi lời nhắn cho tụi mình!
+                      Tụi mình vẫn luôn trân trọng tình cảm của {name.trim()}. Hẹn gặp {name.trim()} vào dịp khác nhé! 🌸
                     </div>
                   </>
                 )}
                 {wish.trim() && (
                   <div className="w-full flex flex-col items-center px-4 py-3 bg-white rounded-xl border border-rose-100 shadow-sm mt-2">
-                    <div className="text-xs text-gray-400 mb-1">Lời nhắn của {name.trim()} tới tụi mình</div>
+                    <div className="text-xs text-gray-400 mb-1">Lời nhắn của {name.trim()} tới tụi mình nè</div>
                     <div className="px-2 py-1 text-rose-500 text-center text-base break-words font-medium">
                       “{wish.trim()}”
                     </div>
@@ -175,7 +167,7 @@ export default function Footer() {
                 className="mt-1 px-4 py-2 rounded-lg border border-rose-200 bg-white text-rose-500 font-medium hover:bg-rose-50 transition"
                 onClick={() => setSubmitted(null)}
               >
-                Đổi ý? Nhấn lại nè 💌
+                Muốn đổi ý? Nhấn lại nè 💌
               </button>
             </div>
           )}
