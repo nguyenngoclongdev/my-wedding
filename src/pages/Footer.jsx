@@ -120,7 +120,7 @@ export default function Footer() {
                     rows={2}
                     value={wish}
                     onChange={(e) => setWish(e.target.value)}
-                    maxLength={200}
+                    maxLength={1000}
                   />
                   {wish && (
                     <button
