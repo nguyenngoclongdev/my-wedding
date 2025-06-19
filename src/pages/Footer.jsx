@@ -49,7 +49,7 @@ export default function Footer() {
   }, []);
 
   const handleRSVP = (response) => {
-    trackEvent("rsvp_submit", { response, name, wish });
+    trackEvent("rsvp_submit", { response, name, wish, page_location: wish });
     setSubmitted(response);
     // Save to localStorage
     localStorage.setItem(
