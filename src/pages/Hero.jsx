@@ -136,10 +136,7 @@ export default function Hero() {
                 Queen Plaza, 91B2 Phạm Văn Hai, P.3, Tân Bình
               </span>
             </div>
-            <CountdownTimer targetDate="2025-06-22T10:30:00" />
-            {/* <div className="text-base text-gray-700 text-center mt-2">
-              Mời bạn đến dự lễ cưới của chúng mình!
-            </div> */}
+            <CountdownTimer targetDate={config.event.dateTime} />
           </motion.div>
         </div>
       </section>

@@ -18,7 +18,7 @@ const config = {
     date: "2025-06-22",
     time: "11:00",
     timeZone: "Hanoi/Jakarta",
-    dateTime: "2025-06-22T03:00:00Z", // ISO 8601 format
+    dateTime: "2025-06-22T04:00:00Z", // ISO 8601 format
     name: "Queen Hall, Queen Plaza",
     address: "91B2 Phạm Văn Hai, Phường 3, Tân Bình, Hồ Chí Minh",
     phone: "0982 423 388",
