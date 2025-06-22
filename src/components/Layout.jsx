@@ -152,6 +152,25 @@ const Layout = ({ children }) => {
     }
   };
 
+  // --- Add this effect for auto-scroll on hash change ---
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && SECTION_IDS.includes(hash)) {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    };
+    // Scroll on mount if hash exists
+    scrollToHash();
+    // Listen for hashchange events
+    window.addEventListener('hashchange', scrollToHash);
+    return () => window.removeEventListener('hashchange', scrollToHash);
+  }, []);
+  // --- end addition ---
+
   // Toggle music function
   const toggleMusic = async () => {
     if (audioRef.current) {
