@@ -117,7 +117,7 @@ END:VCALENDAR`;
           {/* Show badge if event is done, else show add-to-calendar button */}
           {isDone ? (
             <span className="bg-rose-200 text-rose-700 text-xs font-semibold px-3 py-1 rounded-full shadow">
-              Đã kết thúc
+              Đã diễn ra
             </span>
           ) : (
             <motion.button
