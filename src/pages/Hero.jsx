@@ -127,13 +127,13 @@ export default function Hero() {
                 {config.couple.groomName}
               </span>
               <span className="flex items-center gap-2 text-base md:text-lg text-gray-700 font-medium mt-1">
-                Chủ Nhật | 22 - 06 - 2025
+                Chủ Nhật | {config.event.date}
               </span>
               <span className="flex items-center gap-2 text-sm md:text-base text-gray-500 font-normal mt-1">
                 Đón Khách 11:00 - Khai Tiệc 12:00
               </span>
               <span className="flex items-center gap-2 text-sm md:text-base text-gray-500 font-normal">
-                Queen Plaza, 91B2 Phạm Văn Hai, P.3, Tân Bình
+                {config.event.name}, {config.event.address}
               </span>
             </div>
             <CountdownTimer targetDate={config.event.dateTime} />

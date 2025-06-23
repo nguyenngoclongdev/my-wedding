@@ -54,7 +54,7 @@ const CalendarButton = ({ icon: Icon, label, onClick, className = "" }) => (
   </motion.button>
 );
 
-const SingleEventCard = ({ eventData }) => {
+const SingleEventCard = ({ eventData, isDone }) => {
   const [showCalendarModal, setShowCalendarModal] = useState(false);
 
   const googleCalendarLink = () => {
@@ -114,14 +114,21 @@ END:VCALENDAR`;
           <h3 className="text-xl font-semibold text-gray-800">
             {eventData.title.split(" - ")[0]}
           </h3>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="text-rose-500 hover:text-rose-600 transition-colors"
-            onClick={() => setShowCalendarModal(true)}
-          >
-            <CalendarPlus className="w-5 h-5" />
-          </motion.button>
+          {/* Show badge if event is done, else show add-to-calendar button */}
+          {isDone ? (
+            <span className="bg-rose-200 text-rose-700 text-xs font-semibold px-3 py-1 rounded-full shadow">
+              Đã kết thúc
+            </span>
+          ) : (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="text-rose-500 hover:text-rose-600 transition-colors"
+              onClick={() => setShowCalendarModal(true)}
+            >
+              <CalendarPlus className="w-5 h-5" />
+            </motion.button>
+          )}
         </div>
         <div className="space-y-3 text-gray-600">
           <div className="flex items-center space-x-3">
@@ -141,74 +148,80 @@ END:VCALENDAR`;
         </div>
       </motion.div>
 
-      <Modal
-        isOpen={showCalendarModal}
-        onClose={() => setShowCalendarModal(false)}
-      >
-        <div className="space-y-6 ">
-          <div className="flex justify-between  items-center">
-            <h3 className="text-xl font-semibold text-gray-800">
-              Thêm vào Lịch nè!
-            </h3>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setShowCalendarModal(false)}
-              className="text-gray-500 hover:text-gray-700"
-            >
-              <X className="w-5 h-5" />
-            </motion.button>
+      {/* Hide calendar modal if event is done */}
+      {!isDone && (
+        <Modal
+          isOpen={showCalendarModal}
+          onClose={() => setShowCalendarModal(false)}
+        >
+          <div className="space-y-6 ">
+            <div className="flex justify-between  items-center">
+              <h3 className="text-xl font-semibold text-gray-800">
+                Thêm vào Lịch nè!
+              </h3>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setShowCalendarModal(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X className="w-5 h-5" />
+              </motion.button>
+            </div>
+
+            <div className="space-y-3">
+              <CalendarButton
+                icon={(props) => (
+                  <Chrome {...props} className="w-5 h-5 text-rose-500" />
+                )}
+                label="Lịch Google"
+                onClick={() => {
+                  window.open(googleCalendarLink(), "_blank");
+                  trackEvent("calendar_add_google", { event: eventData.title });
+                }}
+              />
+
+              <CalendarButton
+                icon={(props) => (
+                  <Apple {...props} className="w-5 h-5 text-gray-900" />
+                )}
+                label="Lịch Apple"
+                onClick={() => {
+                  downloadICSFile();
+                  trackEvent("calendar_add_apple", { event: eventData.title });
+                }}
+              />
+
+              <CalendarButton
+                icon={(props) => (
+                  <CalendarIcon {...props} className="w-5 h-5 text-blue-600" />
+                )}
+                label="Lịch Outlook"
+                onClick={() => {
+                  downloadICSFile();
+                  trackEvent("calendar_add_outlook", { event: eventData.title });
+                }}
+              />
+            </div>
           </div>
-
-          <div className="space-y-3">
-            <CalendarButton
-              icon={(props) => (
-                <Chrome {...props} className="w-5 h-5 text-rose-500" />
-              )}
-              label="Lịch Google"
-              onClick={() => {
-                window.open(googleCalendarLink(), "_blank");
-                trackEvent("calendar_add_google", { event: eventData.title });
-              }}
-            />
-
-            <CalendarButton
-              icon={(props) => (
-                <Apple {...props} className="w-5 h-5 text-gray-900" />
-              )}
-              label="Lịch Apple"
-              onClick={() => {
-                downloadICSFile();
-                trackEvent("calendar_add_apple", { event: eventData.title });
-              }}
-            />
-
-            <CalendarButton
-              icon={(props) => (
-                <CalendarIcon {...props} className="w-5 h-5 text-blue-600" />
-              )}
-              label="Lịch Outlook"
-              onClick={() => {
-                downloadICSFile();
-                trackEvent("calendar_add_outlook", { event: eventData.title });
-              }}
-            />
-          </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
     </div>
   );
 };
 
 // Main EventCards component that handles multiple events
-const EventCards = ({ events }) => {
+export default function EventCards({ events, doneEvents = [] }) {
   return (
-    <div className="space-y-4">
-      {events.map((event, index) => (
-        <SingleEventCard key={index} eventData={event} />
-      ))}
+    <div className="grid gap-8">
+      {events.map((event) => {
+        const isDone = doneEvents.includes(event.id || event.title?.toLowerCase());
+        return (
+          <div key={event.id || event.title} className="relative">
+            <SingleEventCard eventData={event} isDone={isDone} />
+          </div>
+        );
+      })}
     </div>
   );
-};
-
-export default EventCards;
+}

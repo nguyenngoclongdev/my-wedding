@@ -66,7 +66,11 @@ export default function Events() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="max-w-2xl mx-auto"
           >
-            <EventCards events={config.eventDetails} />
+            {/* Mark HCM event as done by passing its id/title */}
+            <EventCards
+              events={config.eventDetails}
+              doneEvents={["hcm"]} // Replace "hcm" with the actual id/title of the HCM event in your config
+            />
           </motion.div>
         </motion.div>
 

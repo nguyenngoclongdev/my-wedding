@@ -15,25 +15,26 @@ const config = {
 
   // Event Details
   event: {
-    date: "2025-06-22",
+    date: "2025-07-13",
     time: "11:00",
     timeZone: "Hanoi/Jakarta",
-    dateTime: "2025-06-22T04:00:00Z", // ISO 8601 format
-    name: "Queen Hall, Queen Plaza",
-    address: "91B2 Phạm Văn Hai, Phường 3, Tân Bình, Hồ Chí Minh",
-    phone: "0982 423 388",
-    maps_url: "https://maps.google.com/?q=Queen+Plaza+Tân+Bình",
+    dateTime: "2025-07-13T04:00:00Z", // ISO 8601 format
+    name: "Hương Cau Garden",
+    address: "164 Nguyễn Tất Thành, Ea Kar, Đắk Lắk",
+    phone: "0357 042 929",
+    maps_url: "https://maps.app.goo.gl/RCzf9xgcsJpHvbW18",
     maps_embed:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.232026574061!2d106.66049787504214!3d10.793533089356266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175297c5248df09%3A0xfb67a62d51ec33d8!2sQueen%20Plaza%20T%C3%A2n%20B%C3%ACnh!5e0!3m2!1svi!2s!4v1750083345025!5m2!1svi!2s",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.499537534723!2d108.45266529999999!3d12.810964099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171de47688b65d7%3A0x1317ed2dcf2fad38!2zSMawxqFuZyBDYXUgR2FyZGVu!5e0!3m2!1svi!2s!4v1750638276861!5m2!1svi!2s",
     maps_navigation:
-      "https://www.google.com/maps/dir/?api=1&destination=Queen+Plaza+Tân+Bình,+Phạm+Văn+Hai,+phường+3,+Tân+Bình,+Hồ+Chí+Minh",
-    latitude: 10.7932799, // Replace with actual coordinates
-    longitude: 106.6630617, // Replace with actual coordinates
+      "https://www.google.com/maps/dir/?api=1&destination=Hương+Cau+Garden,+164+Nguyễn+Tất+Thành,+Ea+Kar,+Đắk+Lắk",
+    latitude: 12.8109641, // Replace with actual coordinates
+    longitude: 108.4500904, // Replace with actual coordinates
   },
 
   eventDetails: [
     {
-      title: "Tại Thành Phố Hồ Chí Minh",
+      id: "hcm",
+      title: "Tại Hồ Chí Minh",
       date: "2025-06-22",
       startTime: "11:00",
       endTime: "14:30",
@@ -41,6 +42,7 @@ const config = {
       location: "Queen Hall, Queen Plaza",
     },
     {
+      id: "daklak",
       title: "Tại Đắk Lắk",
       date: "2025-07-13",
       startTime: "11:00",
