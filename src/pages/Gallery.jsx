@@ -9,7 +9,6 @@ import "lightgallery/css/lg-thumbnail.css";
 // import plugins if you need
 import LightGallery from "lightgallery/react";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
-import lgZoom from "lightgallery/plugins/zoom";
 
 export default function Gallery() {
   const images = [
@@ -235,27 +234,20 @@ export default function Gallery() {
         {/* Gallery Grid with LightGallery */}
         <LightGallery
           speed={500}
-          plugins={[lgThumbnail, lgZoom]}
+          download={false}
+          plugins={[lgThumbnail]}
           elementClassNames="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
           {images.map((img, idx) => (
             <a
               key={img.full}
               href={img.full}
-              data-lg-size="1600-1067"
-              data-src={img.full}
               data-sub-html={`<div class='lg-sub-html'>Ảnh ${idx + 1}</div>`}
-              className="block group relative rounded-xl overflow-hidden shadow-lg"
               onClick={() =>
                 trackEvent("gallery_image_click", { src: img.full })
               }
             >
-              <img
-                src={img.thumb}
-                alt={`Gallery ${idx + 1}`}
-                className="object-cover w-full h-56 md:h-64 transition-transform duration-300 group-hover:scale-105 rounded-xl"
-                loading="lazy"
-              />
+              <img src={img.thumb} alt={`Ảnh ${idx + 1}`} />
             </a>
           ))}
         </LightGallery>
