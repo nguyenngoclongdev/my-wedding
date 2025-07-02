@@ -1,14 +1,90 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { LoaderCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "../analytics";
 
-// import styles
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
+// New component for smooth image loading
+function GalleryImage({ src, alt, onClick }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div
+      className="relative cursor-pointer group"
+      onClick={(e) => {
+        trackEvent("gallery_image_click", { src, alt });
+        if (onClick) onClick(e);
+      }}
+    >
+      {/* Blurred placeholder */}
+      <div
+        className={`absolute inset-0 rounded-xl bg-gray-200 ${
+          loaded ? "opacity-0" : "opacity-100"
+        } transition-opacity duration-700`}
+        style={{
+          filter: "blur(12px)",
+        }}
+      />
+      {/* Actual image with fade-in and scale using motion */}
+      <AnimatePresence>
+        {loaded ? (
+          <motion.img
+            key="img"
+            src={src}
+            alt={alt}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="rounded-xl shadow-lg object-cover w-full h-56 md:h-64 transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          <img
+            src={src}
+            alt={alt}
+            className="rounded-xl shadow-lg object-cover w-full h-56 md:h-64 opacity-0"
+            loading="lazy"
+            onLoad={() => setLoaded(true)}
+          />
+        )}
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 rounded-xl transition" />
+    </div>
+  );
+}
 
-// import plugins if you need
-import LightGallery from "lightgallery/react";
-import lgThumbnail from "lightgallery/plugins/thumbnail";
+// Lazy load image only when in viewport
+function LazyGalleryImage({ src, alt, onClick }) {
+  const [show, setShow] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShow(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="relative cursor-pointer group min-h-[14rem]"
+      onClick={onClick}
+    >
+      {show ? (
+        <GalleryImage src={src} alt={alt} />
+      ) : (
+        <div className="absolute inset-0 rounded-xl bg-gray-100 animate-pulse" />
+      )}
+    </div>
+  );
+}
 
 export default function Gallery() {
   const images = [
@@ -186,72 +262,163 @@ export default function Gallery() {
     },
   ];
 
+  // Modal xem ảnh lớn
+  const [selected, setSelected] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [modalImgLoaded, setModalImgLoaded] = useState(false); // Thêm state này
+
+  // Reset trạng thái khi đóng modal hoặc đổi ảnh
+  useEffect(() => {
+    setModalImgLoaded(false);
+  }, [selected]);
+
   return (
-    <section
-      id="gallery"
-      className="min-h-screen relative overflow-hidden bg-gradient-to-b from-white via-rose-50/30 to-white"
-    >
-      {/* Decorative Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-rose-100/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-100/20 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
-      </div>
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center space-y-4 mb-16"
-        >
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-block text-rose-500 font-medium"
-          >
-            Xem Ảnh Của Tụi Mình Nè
-          </motion.span>
-          <motion.h2
+    <>
+      <section
+        id="gallery"
+        className="min-h-screen relative overflow-hidden bg-gradient-to-b from-white via-rose-50/30 to-white"
+      >
+        {/* Decorative Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-rose-100/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-100/20 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Section Header */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-4xl md:text-5xl font-serif text-gray-800"
+            transition={{ duration: 0.8 }}
+            className="text-center space-y-4 mb-16"
           >
-            Khoảnh Khắc
-          </motion.h2>
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="flex items-center justify-center gap-4 pt-4"
-          >
-            <div className="h-[1px] w-12 bg-rose-200" />
-            <span className="text-rose-400 text-xl">💍</span>
-            <div className="h-[1px] w-12 bg-rose-200" />
-          </motion.div>
-        </motion.div>
-        {/* Gallery Grid with LightGallery */}
-        <LightGallery
-          speed={500}
-          download={false}
-          plugins={[lgThumbnail]}
-          elementClassNames="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-        >
-          {images.map((img, idx) => (
-            <a
-              key={img.full}
-              href={img.full}
-              data-sub-html={`<div class='lg-sub-html'>Ảnh ${idx + 1}</div>`}
-              onClick={() =>
-                trackEvent("gallery_image_click", { src: img.full })
-              }
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-block text-rose-500 font-medium"
             >
-              <img src={img.thumb} alt={`Ảnh ${idx + 1}`} />
-            </a>
-          ))}
-        </LightGallery>
-      </div>
-    </section>
+              Xem Ảnh Của Tụi Mình Nè
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-5xl font-serif text-gray-800"
+            >
+              Khoảnh Khắc
+            </motion.h2>
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ delay: 0.4 }}
+              className="flex items-center justify-center gap-4 pt-4"
+            >
+              <div className="h-[1px] w-12 bg-rose-200" />
+              <span className="text-rose-400 text-xl">💍</span>
+              <div className="h-[1px] w-12 bg-rose-200" />
+            </motion.div>
+          </motion.div>
+
+          {/* Gallery Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {images.slice(0, visibleCount).map((img, idx) => (
+              <LazyGalleryImage
+                key={img.full}
+                src={img.thumb}
+                alt={`Gallery ${idx + 1}`}
+                onClick={() => {
+                  setSelected(img.full);
+                  trackEvent("gallery_modal_open", { image: img.full });
+                }}
+              />
+            ))}
+          </div>
+          {/* Nút xem thêm */}
+          {visibleCount < images.length && (
+            <div className="flex justify-center mt-8">
+              <button
+                className="px-6 py-2 rounded-full bg-rose-200 text-rose-700 font-semibold shadow hover:bg-rose-300 transition"
+                onClick={() => {
+                  setVisibleCount((c) => c + 12);
+                  trackEvent("gallery_see_more", {
+                    currentCount: visibleCount,
+                  });
+                }}
+              >
+                Xem thêm ảnh
+              </button>
+            </div>
+          )}
+          {/* Gallery Section Heading */}
+        </div>
+        {/* Modal xem ảnh lớn */}
+        <AnimatePresence>
+          {selected && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelected(null)}
+            >
+              <div className="flex items-center justify-center max-w-[90vw] max-h-[80vh]">
+                <div
+                  className={`relative ${modalImgLoaded ? "inline-block" : "flex items-center justify-center"} 
+                    ${!modalImgLoaded ? "min-w-[300px] min-h-[200px]" : ""}`}
+                >
+                  {/* Close button luôn nằm ở top right của ảnh */}
+                  <button
+                    className={`absolute top-2 right-2 z-20 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition ${
+                      modalImgLoaded
+                        ? "opacity-100 cursor-pointer"
+                        : "opacity-60 cursor-pointer"
+                    }`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelected(null);
+                    }}
+                    aria-label="Đóng"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-gray-700"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  {/* Loading spinner khi ảnh chưa load */}
+                  {!modalImgLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-2xl border-4 border-white shadow-2xl z-10">
+                      <LoaderCircle className="animate-spin h-12 w-12 text-rose-400" />
+                    </div>
+                  )}
+                  <motion.img
+                    src={`${selected}`}
+                    alt="Selected"
+                    className="max-w-[90vw] max-h-[80vh] rounded-2xl shadow-2xl border-4 border-white transition-opacity duration-300"
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0.8 }}
+                    onClick={(e) => e.stopPropagation()}
+                    loading="lazy"
+                    onLoad={() => setModalImgLoaded(true)}
+                    style={{ opacity: modalImgLoaded ? 1 : 0 }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
+    </>
   );
 }
